@@ -7,7 +7,7 @@
 * Ultralytics：[https://github.com/ultralytics/ultralytics](https://github.com/ultralytics/ultralytics)
 * Ultralytics Nvidia Jetson：[https://docs.ultralytics.com/guides/nvidia-jetson/#install-pytorch-and-torchvision_1](https://docs.ultralytics.com/guides/nvidia-jetson/#install-pytorch-and-torchvision_1)
 
-【Note】如果你的设备是一台全新的 Nvidia Orin，建议参考下面的博客进行刷机，并且按照 `【15. [可选] 安装 Yolo11 与 DeepStream】` 章节完成安装，这样可以跳过下面的 `【Install Ultralytics】` 章节内容；
+【Note】如果你的设备是一台全新的 Nvidia Orin，建议参考下面的博客进行刷机，并且按照 `【15. [可选] 安装 Yolo11 与 DeepStream】` 章节完成安装，这样可以跳过下面的 `【安装并配置 Ultralytics】` 章节内容；
 
 * Nvidia Orin DK 刷机：[https://blog.csdn.net/nenchoumi3119/article/details/149779298?spm=1001.2014.3001.5502](https://blog.csdn.net/nenchoumi3119/article/details/149779298?spm=1001.2014.3001.5502)
 
