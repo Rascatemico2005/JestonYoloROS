@@ -13,14 +13,10 @@ import time
 from ultralytics import YOLO
 
 from sensor_msgs.msg import CompressedImage
-# 关键改动：导入新的自定义分类消息类型
 from yolo_detect.msg import Classification, ClassificationArray
 
 class YoloClassifierNode:
     def __init__(self):
-        """
-        初始化YOLOv8分类ROS节点
-        """
         rospy.init_node('yolo_classifier_node', anonymous=True)
 
         # --- 获取ROS参数 ---
@@ -38,7 +34,7 @@ class YoloClassifierNode:
         self.sub_prev_time = 0
         self.sub_fps = 0
 
-        # --- 智能加载模型 (与检测节点逻辑相同) ---
+        # --- 智能加载模型 ---
         if not os.path.exists(self.engine_model_path):
             rospy.logwarn(f"TensorRT engine not found at {self.engine_model_path}. Exporting from .pt model...")
             if not os.path.exists(pt_model_path):
@@ -54,7 +50,6 @@ class YoloClassifierNode:
         # 加载最终的TensorRT模型进行推理
         rospy.loginfo(f"Loading TensorRT engine from {self.engine_model_path}")
         try:
-            # 确保你的模型是分类模型 (e.g., yolov8n-cls.pt)
             self.model = YOLO(self.engine_model_path, task='classify')
             rospy.loginfo("Ultralytics YOLO Classification model loaded successfully.")
         except Exception as e:
@@ -63,7 +58,6 @@ class YoloClassifierNode:
 
         # --- 设置订阅者和发布者 ---
         self.image_sub = rospy.Subscriber(self.input_topic, CompressedImage, self.image_callback, queue_size=1, buff_size=2**24)
-        # 改动：发布者使用新的话题和消息类型
         self.classification_pub = rospy.Publisher(self.classification_topic, ClassificationArray, queue_size=10)
         self.annotated_image_pub = rospy.Publisher(self.annotated_image_topic, CompressedImage, queue_size=1)
 
