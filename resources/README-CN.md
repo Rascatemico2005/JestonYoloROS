@@ -34,7 +34,7 @@ https://pan.baidu.com/s/1pxzS423gZaWbsfSmpQGrsQ?pwd=24wj
 
 * 2025年08月04日：完成仓库初始化；
 
-* Target：添加 Yolo 3D 部分；
+* Target：添加 Yolo 3D 部分、添加检测时标签限制；
 
 ----
 #  软硬件确认
