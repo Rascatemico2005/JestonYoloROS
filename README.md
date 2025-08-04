@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Jeston Yolo ROS
 
 We provide the following language versions of the ReadMe file to help you quickly familiarize yourself with this project. Click the hyperlink below to jump:
@@ -7,3 +8,7 @@ We provide the following language versions of the ReadMe file to help you quickl
 * [README-CN.md](resources/README-CN.md)：简体中文；
 * [README-EN.md](resources/README-EN.md)：English-US；
 
+=======
+# JestonYoloROS
+This repository implements Yolo functionality using TensorRT and CUDA acceleration on Nvidia Jeston devices and the ROS framework.
+>>>>>>> remotes/origin/main
