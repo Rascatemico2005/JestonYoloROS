@@ -1,0 +1,21 @@
+<launch>
+    <arg name="pt_model_path"       default="$(find yolo_detect)/models/yolo11l-pose.pt"/>
+    <arg name="engine_model_path"   default="$(find yolo_detect)/models/yolo11l-pose.engine"/>
+
+    <arg name="input_topic"             default="/camera/color/image_raw/compressed"/>
+    <arg name="pose_topic"              default="/yolo_pose"/>
+    <arg name="annotated_image_topic"   default="/yolo_pose/camera/color/compressed" />
+    
+    <arg name="confidence_threshold"    default="0.5"/>
+
+    <node name="yolo_2d_pose_estimate_node" pkg="yolo_detect" type="yolo_2d_pose_estimate.py" output="screen">
+        <param name="pt_model_path"         value="$(arg pt_model_path)" />
+        <param name="engine_model_path"     value="$(arg engine_model_path)" />
+
+        <param name="input_topic"           value="$(arg input_topic)" />
+        <param name="pose_topic"            value="$(arg pose_topic)" />
+        <param name="annotated_image_topic" value="$(arg annotated_image_topic)" />
+
+        <param name="confidence_threshold"  value="$(arg confidence_threshold)" />
+    </node>
+</launch>

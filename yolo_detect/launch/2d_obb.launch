@@ -1,0 +1,21 @@
+<launch>
+    <arg name="pt_model_path"       default="$(find yolo_detect)/models/yolo11l-obb.pt"/>
+    <arg name="engine_model_path"   default="$(find yolo_detect)/models/yolo11l-obb.engine"/>
+
+    <arg name="input_topic"             default="/camera/color/image_raw/compressed"/>
+    <arg name="obb_topic"               default="/yolo_obb"/>
+    <arg name="annotated_image_topic"   default="/yolo_obb/camera/color/compressed" />
+    
+    <arg name="confidence_threshold"    default="0.5"/>
+
+    <node name="yolo_obb_node" pkg="yolo_detect" type="yolo_2d_obb.py" output="screen">
+        <param name="pt_model_path"         value="$(arg pt_model_path)"/>
+        <param name="engine_model_path"     value="$(arg engine_model_path)"/>
+
+        <param name="input_topic"           value="$(arg input_topic)"/>
+        <param name="obb_topic"             value="$(arg obb_topic)"/>
+        <param name="annotated_image_topic" value="$(arg annotated_image_topic)" />
+
+        <param name="confidence_threshold"  value="$(arg confidence_threshold)"/>
+    </node>
+</launch>

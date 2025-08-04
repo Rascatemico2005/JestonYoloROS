@@ -1,0 +1,22 @@
+<launch>
+    <arg name="pt_model_path"       default="$(find yolo_detect)/models/yolo11l-cls.pt"/>
+    <arg name="engine_model_path"   default="$(find yolo_detect)/models/yolo11l-cls.engine"/>
+
+
+    <arg name="input_topic"             default="/camera/color/image_raw/compressed" />
+    <arg name="classification_topic"    default="/yolo_classify" />
+    <arg name="annotated_image_topic"   default="/yolo_classify/annotated_image/compressed" />
+    
+    <arg name="confidence_threshold"    default="0.5" />
+
+    <node name="yolo_classifier_node" pkg="yolo_detect" type="yolo_2d_classification.py" output="screen">
+        <param name="pt_model_path"         value="$(arg pt_model_path)" />
+        <param name="engine_model_path"     value="$(arg engine_model_path)" />
+
+        <param name="input_topic"           value="$(arg input_topic)" />
+        <param name="classification_topic"  value="$(arg classification_topic)" />
+        <param name="annotated_image_topic" value="$(arg annotated_image_topic)" />
+        
+        <param name="confidence_threshold"  value="$(arg confidence_threshold)" />
+    </node>
+</launch>
