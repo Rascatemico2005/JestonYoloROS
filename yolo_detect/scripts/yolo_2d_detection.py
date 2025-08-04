@@ -31,8 +31,7 @@ class YoloUltralyticsNode:
         # 用于计算处理速度的FPS
         self.proc_prev_time = 0
         self.proc_fps = 0
-        
-        # 【订阅FPS新增】用于计算图像订阅频率的FPS
+
         self.sub_prev_time = 0
         self.sub_fps = 0
 
@@ -65,7 +64,7 @@ class YoloUltralyticsNode:
         rospy.loginfo("YOLO Ultralytics node initialized and ready.")
 
     def image_callback(self, msg):
-        # 【订阅FPS新增】计算订阅FPS
+        # 计算订阅FPS
         sub_current_time = time.time()
         if self.sub_prev_time > 0:
             time_diff = sub_current_time - self.sub_prev_time
