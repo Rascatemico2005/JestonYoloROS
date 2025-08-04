@@ -1,6 +1,6 @@
 # Jeston Yolo ROS
 
-这个包是在 Nvidia Orin 上运行 Yolov11 模型，包含了五个基础功能节点：目标检测、语意分割、图像分类、姿态估计、OBB计算。
+这个包是在 `Nvidia Orin` 上运行 Yolov11 模型，包含了五个基础功能节点：目标检测、语意分割、图像分类、姿态估计、OBB计算。
 
 以下是这个仓库参考的博客与链接：
 
@@ -21,23 +21,8 @@
 https://pan.baidu.com/s/1pxzS423gZaWbsfSmpQGrsQ?pwd=24wj
 ```
 
----
-# 贡献者
-
-该工程由 `中国科学院自动化研究所` 提供硬件与测试场地，同时以下人员在该项目的开发中做出了巨大贡献，在此感谢他们的付出：
-
-[WenJiang Xu 徐文江](https://github.com/HEA1OR)，[PengFei Yi 易鹏飞](https://github.com/alfie010)，[JingKai Xu 徐靖凯](https://github.com/Triumphant-strain)，[XingYu Wang 王行宇](https://github.com/xywang227)，[YaNan Hao 郝亚楠](https://github.com/haoyanan2024)，[YuWei Wang 王雨薇](https://github.com/YuweiWang2002)
-
-
 ----
-# News & Future Work
-
-* 2025年08月04日：完成仓库初始化；
-
-* Target：添加 Yolo 3D 部分、添加检测时标签限制；
-
-----
-#  软硬件确认
+# 软硬件确认
 
 请先确认你的软硬件配置是否与通过测试的列表一致：
 
@@ -49,7 +34,7 @@ Ultralytics 官网中 [NVIDIA Jetson AGX Orin Developer Kit (64GB)](https://docs
 
 ![model_compare](./model_compare.png)
 
-Orin 设备可以通过下面的命令查看当前 CUDA 与 TensorRT 版本：
+通过下面的命令查看当前 CUDA 与 TensorRT 版本：
 
 ```bash
 $ jetson_release
@@ -74,6 +59,7 @@ $ jetson_release
 ## 1.1 拉取源码并安装依赖
 
 使用下面的命令拉取源码：
+
 ```bash
 $ git clone https://github.com/ultralytics/ultralytics.git
 ```
@@ -135,6 +121,7 @@ $ python -c "import torch; print(f'CUDA available: {torch.cuda.is_available()}')
 ## 2.1 拉取源码
 
 首先进入你的 ROS 工作空间，这里假设为 `detect_ws`：
+
 ```bash
 $ cd detect_ws/src
 $ git clone --recursive https://github.com/GaohaoZhou-ops/JestonYoloROS.git
@@ -328,8 +315,6 @@ $ roslaunch yolo_detect 2d_classification.launch
 
 ## 4.5 姿态估计
 
-
-
 ```bash
 $ conda activate yolo11
 $ cd detect_ws
@@ -338,7 +323,6 @@ $ roslaunch yolo_detect 2d_pose_estimate.launch
 ```
 
 ![yolo-segment](./yolo_pose.png)
-
 
 
 ----
