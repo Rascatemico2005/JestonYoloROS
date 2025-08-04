@@ -1,4 +1,4 @@
-# Yolo with ROS
+# Jeston Yolo ROS
 
 这个包是在 Nvidia Orin 上运行 Yolov11 模型，包含了五个基础功能节点：目标检测、语意分割、图像分类、姿态估计、OBB计算。
 
@@ -26,7 +26,7 @@ https://pan.baidu.com/s/1pxzS423gZaWbsfSmpQGrsQ?pwd=24wj
 
 该工程由 `中国科学院自动化研究所` 提供硬件与测试场地，同时以下人员在该项目的开发中做出了巨大贡献，在此感谢他们的付出：
 
-[Gaohao Zhou 周高豪](https://github.com/GaohaoZhou-ops)、
+[WenJiang Xu 徐文江](https://github.com/HEA1OR)，[PengFei Yi 易鹏飞](https://github.com/alfie010)，[JingKai Xu 徐靖凯](https://github.com/Triumphant-strain)，[XingYu Wang 王行宇](https://github.com/xywang227)，[YaNan Hao 郝亚楠](https://github.com/haoyanan2024)，[YuWei Wang 王雨薇](https://github.com/YuweiWang2002)
 
 
 ----
