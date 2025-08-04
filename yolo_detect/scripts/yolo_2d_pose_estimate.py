@@ -12,20 +12,14 @@ import time
 
 from ultralytics import YOLO
 
-# --- 消息类型导入 ---
 from sensor_msgs.msg import CompressedImage
-# 导入我们新创建的自定义消息
 from yolo_detect.msg import PoseKeypoint, PoseEstimate, PoseArray
 
 class YoloPoseNode:
     def __init__(self):
-        """
-        初始化YOLO姿态估计ROS节点
-        """
         rospy.init_node('yolo_pose_node', anonymous=True)
 
         # --- 获取ROS参数 ---
-        # 注意：模型必须是姿态估计模型，例如 yolo11l-pose.pt
         pt_model_path = rospy.get_param('~pt_model_path', 'yolov11l-pose.pt')
         self.engine_model_path = rospy.get_param('~engine_model_path', 'yolov11l-pose.engine')
         self.input_topic = rospy.get_param('~input_topic', '/camera/color/image_raw/compressed')
@@ -39,7 +33,7 @@ class YoloPoseNode:
         self.sub_prev_time = 0
         self.sub_fps = 0
 
-        # --- 智能加载模型 (与原脚本逻辑相同) ---
+        # --- 智能加载模型 ---
         if not os.path.exists(self.engine_model_path):
             rospy.logwarn(f"TensorRT engine not found at {self.engine_model_path}. Exporting from .pt model...")
             if not os.path.exists(pt_model_path):
@@ -75,7 +69,7 @@ class YoloPoseNode:
         """
         处理传入图像的回调函数
         """
-        # --- 计算订阅FPS (与原脚本逻辑相同) ---
+        # --- 计算订阅FPS ---
         sub_current_time = time.time()
         if self.sub_prev_time > 0:
             time_diff = sub_current_time - self.sub_prev_time
@@ -97,7 +91,7 @@ class YoloPoseNode:
         result = results[0]
         annotated_frame = result.plot() # result.plot() 会自动绘制边界框和关键点
 
-        # --- 计算处理FPS (与原脚本逻辑相同) ---
+        # --- 计算处理FPS ---
         proc_end_time = time.time()
         time_diff = proc_end_time - proc_start_time
         if time_diff > 0:
@@ -110,7 +104,7 @@ class YoloPoseNode:
         cv2.putText(annotated_frame, sub_fps_text, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2, cv2.LINE_AA)
         cv2.putText(annotated_frame, proc_fps_text, (10, 70), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2, cv2.LINE_AA)
 
-        # --- 发布带标注的图像 (与原脚本逻辑相同) ---
+        # --- 发布带标注的图像 ---
         try:
             annotated_image_msg = CompressedImage()
             annotated_image_msg.header = msg.header
