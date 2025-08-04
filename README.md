@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Jeston Yolo ROS
 
 We provide the following language versions of the ReadMe file to help you quickly familiarize yourself with this project. Click the hyperlink below to jump:
