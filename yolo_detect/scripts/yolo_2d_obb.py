@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import sys
-# 根据您的环境调整路径
 sys.path.append('/usr/lib/python3.8/dist-packages/') 
 
 import rospy
@@ -14,19 +13,17 @@ import time
 from ultralytics import YOLO
 
 from sensor_msgs.msg import CompressedImage
-# [OBB 修改] 导入新的自定义消息类型
 from yolo_detect.msg import OBBDetection, OBBDetectionArray
 
 class YoloOBBNode:
     def __init__(self):
-        # [OBB 修改] 更新节点名称
         rospy.init_node('yolo_obb_node', anonymous=True)
 
         # --- 获取ROS参数 ---
         pt_model_path = rospy.get_param('~pt_model_path', '')
         self.engine_model_path = rospy.get_param('~engine_model_path', '')
         self.input_topic = rospy.get_param('~input_topic', '/camera/color/image_raw/compressed')
-        # [OBB 修改] 更新默认的检测话题名称
+
         self.obb_topic = rospy.get_param('~obb_topic', '/yolo_obb')
         self.annotated_image_topic = rospy.get_param('~annotated_image_topic', '/yolo_obb/camera/color/compressed')
         self.confidence_threshold = rospy.get_param('~confidence_threshold', 0.5)
@@ -37,7 +34,7 @@ class YoloOBBNode:
         self.sub_prev_time = 0
         self.sub_fps = 0
 
-        # --- 智能加载模型 (此逻辑与原版相同，完全兼容) ---
+        # --- 智能加载模型 ---
         if not os.path.exists(self.engine_model_path):
             rospy.logwarn(f"TensorRT engine not found at {self.engine_model_path}. Exporting from .pt model...")
             if not os.path.exists(pt_model_path):
@@ -60,14 +57,13 @@ class YoloOBBNode:
 
         # --- 设置订阅者和发布者 ---
         self.image_sub = rospy.Subscriber(self.input_topic, CompressedImage, self.image_callback, queue_size=1, buff_size=2**24)
-        # [OBB 修改] 发布者使用新的消息类型 OBBDetectionArray
         self.detection_pub = rospy.Publisher(self.obb_topic, OBBDetectionArray, queue_size=10)
         self.annotated_image_pub = rospy.Publisher(self.annotated_image_topic, CompressedImage, queue_size=1)
 
         rospy.loginfo("YOLO OBB Ultralytics node initialized and ready.")
 
     def image_callback(self, msg):
-        # --- FPS计算和图像解码 (与原版相同) ---
+        # --- FPS计算和图像解码 ---
         sub_current_time = time.time()
         if self.sub_prev_time > 0:
             time_diff = sub_current_time - self.sub_prev_time
@@ -83,14 +79,14 @@ class YoloOBBNode:
             rospy.logerr(f"Error decoding compressed image: {e}")
             return
             
-        # --- 模型推理与结果绘制 (与原版相同) ---
+        # --- 模型推理与结果绘制 ---
         # Ultralytics 会自动处理 OBB 模型的推理和绘制
         results = self.model(cv_image, conf=self.confidence_threshold, verbose=False)
         result = results[0]
         # .plot() 方法对 OBB 模型同样适用，会自动绘制旋转框
         annotated_frame = result.plot()
         
-        # --- 结束计时并计算处理FPS (与原版相同) ---
+        # --- 结束计时并计算处理FPS ---
         proc_end_time = time.time()
         if self.proc_prev_time > 0:
             time_diff = proc_end_time - self.proc_prev_time
@@ -103,7 +99,7 @@ class YoloOBBNode:
         cv2.putText(annotated_frame, sub_fps_text, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2, cv2.LINE_AA)
         cv2.putText(annotated_frame, proc_fps_text, (10, 70), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2, cv2.LINE_AA)
 
-        # --- 发布带标注的图像 (与原版相同) ---
+        # --- 发布带标注的图像 ---
         try:
             annotated_image_msg = CompressedImage()
             annotated_image_msg.header = msg.header
@@ -117,12 +113,11 @@ class YoloOBBNode:
         except Exception as e:
             rospy.logerr(f"Error publishing annotated image: {e}")
 
-        # --- [OBB 修改] 发布检测结果数据 ---
+        # --- 发布检测结果数据 ---
         # 创建新的 OBB 消息数组
         detection_array_msg = OBBDetectionArray()
         detection_array_msg.header = msg.header
         
-        # OBB 模型的结果在 result.obb 中，而不是 result.boxes
         if result.obb is not None:
             for obb in result.obb:
                 det = OBBDetection()
