@@ -12,11 +12,8 @@ import time
 
 from ultralytics import YOLO
 
-# 导入ROS标准图像消息和CvBridge
 from sensor_msgs.msg import Image, CompressedImage, RegionOfInterest
 from cv_bridge import CvBridge, CvBridgeError
-
-# 【核心改动】导入我们自定义的消息
 from yolo_detect.msg import Segmentation, SegmentationArray
 
 class YoloSegmentationCustomNode:
@@ -35,7 +32,7 @@ class YoloSegmentationCustomNode:
         self.segmentation_topic = rospy.get_param('~segmentation_topic', '/yolo/segmentation_array')
         self.annotated_image_topic = rospy.get_param('~annotated_image_topic', '/yolo/annotated_image/compressed')
 
-        # --- 初始化FPS计算 (与之前相同) ---
+        # --- 初始化FPS计算  ---
         self.proc_prev_time = 0
         self.proc_fps = 0
         self.sub_prev_time = 0
@@ -60,9 +57,7 @@ class YoloSegmentationCustomNode:
             return
 
         # --- 设置订阅者和发布者 ---
-        self.image_sub = rospy.Subscriber(self.input_topic, CompressedImage, self.image_callback, queue_size=1, buff_size=2**24)
-        
-        # 【修改】创建用于发布自定义消息和可视化图像的Publisher
+        self.image_sub = rospy.Subscriber(self.input_topic, CompressedImage, self.image_callback, queue_size=1, buff_size=2**24)        
         self.segmentation_pub = rospy.Publisher(self.segmentation_topic, SegmentationArray, queue_size=1)
         self.annotated_image_pub = rospy.Publisher(self.annotated_image_topic, CompressedImage, queue_size=1)
 
@@ -104,7 +99,6 @@ class YoloSegmentationCustomNode:
         cv2.putText(annotated_frame, sub_fps_text, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2, cv2.LINE_AA)
         cv2.putText(annotated_frame, proc_fps_text, (10, 70), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2, cv2.LINE_AA)
         
-        # (此处省略了绘制FPS文本和发布annotated_frame的代码，实际使用时应保留)
         try:
             annotated_image_msg = self.bridge.cv2_to_compressed_imgmsg(annotated_frame, dst_format='jpg')
             annotated_image_msg.header = msg.header
@@ -112,7 +106,7 @@ class YoloSegmentationCustomNode:
         except CvBridgeError as e:
             rospy.logerr(f"Error publishing annotated image: {e}")
 
-        # --- 【核心改动】构建并发布 SegmentationArray 消息 ---
+        # --- 构建并发布 SegmentationArray 消息 ---
         seg_array_msg = SegmentationArray()
         seg_array_msg.header = msg.header
 
@@ -143,21 +137,16 @@ class YoloSegmentationCustomNode:
                     mask_cpu = mask_tensor.cpu().numpy().astype(np.uint8)
                     # 将mask缩放到原图尺寸以保证对齐
                     mask_resized = cv2.resize(mask_cpu, (cv_image.shape[1], cv_image.shape[0]), interpolation=cv2.INTER_NEAREST)
-                    
                     # 从完整尺寸的mask中裁剪出bbox对应的区域
                     cropped_mask = mask_resized[y1:y2, x1:x2]
-                    
                     # 将裁剪后的二值掩码转换为ROS Image消息 (0=背景, 255=前景)
                     mask_ros_msg = self.bridge.cv2_to_imgmsg(cropped_mask * 255, encoding="mono8")
                     seg_msg.mask = mask_ros_msg
-                    
                 except CvBridgeError as e:
                     rospy.logerr(f"CvBridge Error creating individual mask: {e}")
                     continue # 跳过这个有问题的对象
-
                 # 4. 将填充好的单个分割对象添加到数组中
                 seg_array_msg.segmentations.append(seg_msg)
-            
         # 即使没有检测到任何物体，也发布一个空数组
         self.segmentation_pub.publish(seg_array_msg)
 
