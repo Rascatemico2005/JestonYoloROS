@@ -1,5 +1,4 @@
 # 单个检测到的姿态的完整数据
-# 头部信息
 int32 class_id
 string class_name
 float32 score # 边界框的置信度
